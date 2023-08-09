@@ -16,5 +16,5 @@ int shell_env(void)
 		putchar('\n');
 	}
 
-	return (0);
+	return (i);
 }
