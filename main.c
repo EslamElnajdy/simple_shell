@@ -34,7 +34,7 @@ int main(int ac, char **args, char **envp)
 			if (is_builtin(tokens))
 			{
 				free_main(tokens, input);
-
+				input = NULL;
 				continue;
 			}
 			else
