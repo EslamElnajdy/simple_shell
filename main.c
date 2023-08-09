@@ -6,7 +6,7 @@
  * Description: long description
  *
  * @ac: argument_1 description
- * @arvs: argument_2 description
+ * @args: argument_2 description
  * @envp: argument_3 desctiontion
  *
  * Return: return description

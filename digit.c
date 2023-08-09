@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * digit_counter - counts the digit
+ * digit - counts the digit
  * @cmd_num: the number
  *
  * Return: the number
