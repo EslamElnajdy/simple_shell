@@ -11,6 +11,8 @@ int is_builtin(char **args)
 		return (0);
 	if (!strcmp(args[0], "exit"))
 		exit_builtin(args);
+    if (!strcmp(args[0], "env"))
+		shell_env();
 	else
 		return (0);
 	return (1);
