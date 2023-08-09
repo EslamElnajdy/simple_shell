@@ -31,11 +31,19 @@ int main(int ac, char **args, char **envp)
 			status = 0;
 		else
 		{
-			path = _getpath(tokens[0]);
-			if (path !=  NULL)
-				status = _fork(path, tokens);
+			if (is_builtin(tokens))
+			{
+				free_main(tokens, input);
+				exit(status);
+			}
 			else
-				status = error_not_found(args, tokens, cmd_num);
+			{
+				path = _getpath(tokens[0]);
+				if (path !=  NULL)
+					status = _fork(path, tokens);
+				else
+					status = error_not_found(args, tokens, cmd_num);
+			}
 		}
 		free_main(tokens, input);
 		input = NULL;

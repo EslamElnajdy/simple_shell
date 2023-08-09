@@ -26,4 +26,7 @@ int digit(size_t cmd_num);
 int error_not_found(char **arvs, char **array_of_tokens, size_t command_num);
 char **tokenize(char *str, const char *delim);
 char **tokenize_input(char *input);
+
+int exit_builtin(char **args);
+int is_builtin(char **args);
 #endif
