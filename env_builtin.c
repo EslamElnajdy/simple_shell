@@ -10,10 +10,10 @@ int shell_env(void)
 {
 	int i;
 
-	for (i = 0; __environ[i]; i++)
+	for (i = 0; __environ[i] != NULL; i++)
 	{
 		puts(__environ[i]);
-		putchar('\n');
+		/*putchar('\n');*/
 	}
 
 	return (0);
