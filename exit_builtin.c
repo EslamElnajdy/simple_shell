@@ -11,5 +11,5 @@ int exit_builtin(char **args)
 	if (args[1] != NULL)
 		exit(atoi(args[1]));
 	else
-		exit(EXIT_CODE);
+		exit(EXIT_FAILURE);
 }
