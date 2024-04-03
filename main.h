@@ -30,4 +30,6 @@ char **tokenize_input(char *input);
 int exit_builtin(char **args);
 int is_builtin(char **args);
 int shell_env(void);
+int shell_setenv(char **args);
+int shell_unsetenv(char **args);
 #endif

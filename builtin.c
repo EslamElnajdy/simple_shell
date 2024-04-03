@@ -13,6 +13,10 @@ int is_builtin(char **args)
 		exit_builtin(args);
 	else if (!strcmp(args[0], "env"))
 		shell_env();
+	else if (!strcmp(args[0], "setenv"))
+		shell_setenv(args);
+	else if (!strcmp(args[0], "unsetenv"))
+		shell_unsetenv(args);
 	else
 		return (0);
 	return (1);
