@@ -8,29 +8,49 @@
 void shell_cd(char **args)
 {
     char *dir = args[1];
-     char *oldpwd;
+    char *oldpwd;
 
     if (dir == NULL)
     {
-        dir = _getenv("HOME");
+        dir = getenv("HOME");
         if (dir == NULL)
         {
-            printf("NO Found HOME dir\n");
+            printf("HOME environment variable not set\n");
             return;
         }
     }
+    else if (strcmp(dir, "-") == 0)
+    {
+        dir = getenv("OLDPWD");
+        if (dir == NULL)
+        {
+            printf("OLDPWD environment variable not set\n");
+            return;
+        }
+    }
+
     oldpwd = getenv("PWD");
-    if (oldpwd == NULL) {
+    if (oldpwd == NULL)
+    {
         printf("PWD environment variable not set\n");
         return;
     }
+
     if (chdir(dir) == -1)
     {
         perror("cd");
         return;
     }
-     if (setenv("PWD", dir, 1) == -1) {
+
+    if (setenv("OLDPWD", oldpwd, 1) == -1)
+    {
         perror("setenv");
-        setenv("PWD", oldpwd, 1);
+        return;
+    }
+
+    if (setenv("PWD", dir, 1) == -1)
+    {
+        perror("setenv");
+        return;
     }
 }
