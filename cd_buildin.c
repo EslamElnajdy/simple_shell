@@ -8,6 +8,8 @@
 void shell_cd(char **args)
 {
     char *dir = args[1];
+     char *oldpwd;
+
     if (dir == NULL)
     {
         dir = _getenv("HOME");
@@ -17,8 +19,19 @@ void shell_cd(char **args)
             return;
         }
     }
+    oldpwd = getenv("PWD");
+    if (oldpwd == NULL) {
+        printf("PWD environment variable not set\n");
+        return;
+    }
     if (chdir(dir) == -1)
     {
         perror("cd");
+        return;
+    }
+     if (setenv("PWD", dir, 1) == -1) {
+        perror("setenv");
+        // Revert to previous PWD if setting fails
+        setenv("PWD", oldpwd, 1);
     }
 }
