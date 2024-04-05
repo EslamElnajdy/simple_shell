@@ -10,6 +10,12 @@ void shell_cd(char **args)
     char *dir = args[1];
     char *oldpwd;
 
+    oldpwd = getenv("PWD");
+    if (oldpwd == NULL)
+    {
+        printf("PWD environment variable not set\n");
+        return;
+    }
     if (dir == NULL)
     {
         dir = getenv("HOME");
@@ -27,13 +33,6 @@ void shell_cd(char **args)
             printf("OLDPWD environment variable not set\n");
             return;
         }
-    }
-
-    oldpwd = getenv("PWD");
-    if (oldpwd == NULL)
-    {
-        printf("PWD environment variable not set\n");
-        return;
     }
 
     if (chdir(dir) == -1)
