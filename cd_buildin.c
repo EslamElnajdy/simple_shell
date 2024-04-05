@@ -31,7 +31,6 @@ void shell_cd(char **args)
     }
      if (setenv("PWD", dir, 1) == -1) {
         perror("setenv");
-        // Revert to previous PWD if setting fails
         setenv("PWD", oldpwd, 1);
     }
 }
