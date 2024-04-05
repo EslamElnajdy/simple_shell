@@ -17,6 +17,8 @@ int is_builtin(char **args)
 		shell_setenv(args);
 	else if (!strcmp(args[0], "unsetenv"))
 		shell_unsetenv(args);
+	else if (!strcmp(args[0], "cd"))
+		shell_cd(args);
 	else
 		return (0);
 	return (1);
