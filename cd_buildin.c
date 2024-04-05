@@ -17,7 +17,7 @@ void shell_cd(char **args)
             return;
         }
     }
-    if (chdir(args[1]) == -1)
+    if (chdir(dir) == -1)
     {
         perror("cd");
     }
