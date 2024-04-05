@@ -18,12 +18,14 @@ void shell_cd(char **args)
     }
     if (dir == NULL)
     {
-        dir = getenv("HOME");
-        if (dir == NULL)
+        char *home_dir = getenv("HOME");
+        if (home_dir == NULL)
         {
             printf("HOME environment variable not set\n");
             return;
         }
+        
+        dir = home_dir;
     }
     else if (strcmp(dir, "-") == 0)
     {
