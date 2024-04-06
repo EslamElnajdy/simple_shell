@@ -32,15 +32,12 @@ void shell_cd(char **args)
         dir = args[1];
     }
 
-
-    if (chdir(dir) == -1) {
-        perror("cd");
-        return;
-    }
-
-
     if (setenv("OLDPWD", cwd, 1) == -1) {
         perror("setenv");
+        return;
+    }
+    if (chdir(dir) == -1) {
+        perror("cd");
         return;
     }
 
