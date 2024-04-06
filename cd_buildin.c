@@ -7,50 +7,50 @@
 
 void shell_cd(char **args)
 {
-    char *dir = args[1];
-    char *oldpwd;
+    char *dir;
+    char buffer[1024];
 
-    oldpwd = getenv("PWD");
-    if (oldpwd == NULL)
-    {
-        printf("PWD environment variable not set\n");
+    char *cwd = getcwd(buffer, sizeof(buffer));
+    if (cwd == NULL) {
+        perror("getcwd");
         return;
     }
-    if (dir == NULL)
-    {
-        char *home_dir = getenv("HOME");
-        if (home_dir == NULL)
-        {
-            printf("HOME environment variable not set\n");
-            return;
-        }
-        
-        dir = home_dir;
-    }
-    else if (strcmp(dir, "-") == 0)
-    {
-        dir = getenv("OLDPWD");
+
+    if (args[1] == NULL) {
+
+        dir = getenv("HOME");
         if (dir == NULL)
-        {
-            printf("OLDPWD environment variable not set\n");
+            dir = getenv("PWD");
+    } else if (strcmp(args[1], "-") == 0) {
+
+        dir = getenv("OLDPWD");
+        if (dir == NULL) {
+            printf("%s\n", cwd);
             return;
         }
+    } else {
+        dir = args[1];
     }
 
-    if (chdir(dir) == -1)
-    {
+
+    if (chdir(dir) == -1) {
         perror("cd");
         return;
     }
 
-    if (setenv("OLDPWD", oldpwd, 1) == -1)
-    {
+
+    if (setenv("OLDPWD", cwd, 1) == -1) {
         perror("setenv");
         return;
     }
 
-    if (setenv("PWD", dir, 1) == -1)
-    {
+    cwd = getcwd(buffer, sizeof(buffer));
+    if (cwd == NULL) {
+        perror("getcwd");
+        return;
+    }
+
+    if (setenv("PWD", cwd, 1) == -1) {
         perror("setenv");
         return;
     }
