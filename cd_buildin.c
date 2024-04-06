@@ -32,10 +32,6 @@ void shell_cd(char **args)
         dir = args[1];
     }
 
-    if (setenv("OLDPWD", cwd, 1) == -1) {
-        perror("setenv");
-        return;
-    }
     if (chdir(dir) == -1) {
         perror("cd");
         return;
@@ -45,6 +41,10 @@ void shell_cd(char **args)
     if (cwd == NULL) {
         perror("getcwd");
         return;
+    }
+    if (setenv("OLDPWD", cwd, 1) == -1) {
+    perror("setenv");
+    return;
     }
 
     if (setenv("PWD", cwd, 1) == -1) {
